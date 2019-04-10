@@ -73,32 +73,34 @@
     </div>
 
     <script>
-      window.addEventListener("keydown", function(e) {
+      window.addEventListener('keydown', function(e) {
         const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
         const key = document.querySelector(`button[data-key="${e.keyCode}"]`);
-        const screen = document.querySelector(".screen");
-        screen.innerHTML = "";
+        const screen = document.querySelector('.screen');
+        screen.innerHTML = '';
         if (!audio) return;
 
         let sound = audio.src
-          .match(/\w+(?=\.)/)
+          .match(/\w+(?=\.wav)/)
           .toString()
           .toUpperCase();
+        console.log(sound);
+        console.log(audio.src);
         audio.currentTime = 0; //rewind to the start
         audio.play();
         screen.innerHTML = sound;
-        key.classList.add("playing");
+        key.classList.add('playing');
       });
 
       function removeTransition(e) {
         // Didn't understand this
-        if (e.propertyName !== "transform") return;
-        this.classList.remove("playing");
+        if (e.propertyName !== 'transform') return;
+        this.classList.remove('playing');
       }
 
-      const keys = document.querySelectorAll(".pad button");
+      const keys = document.querySelectorAll('.pad button');
       keys.forEach(key =>
-        key.addEventListener("transitionend", removeTransition)
+        key.addEventListener('transitionend', removeTransition)
       );
     </script>
   </body>
